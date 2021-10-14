@@ -6,10 +6,10 @@ function App() {
   const [dataDonate, setDataDonate] = useState(null)
   
   return (
-    <div className="App">
+    <div className="min-h-screen py-4 px-6 box-border md:py-16 bg-gray-100">
         {
           dataDonate ?
-            <Success dataDonate={dataDonate} />
+            <Success setDataDonate={setDataDonate} dataDonate={dataDonate} />
           : <Form setDataDonate={setDataDonate} />
         }
     </div>

@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
+
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    width: 6px;
+    background: #F9F9F9;
+}
+
+::-webkit-scrollbar-thumb  {
+    background-color: #2dd4bf;
+    border-radius: 10px;
+}
+
+
+body {
+    font-family: 'Nunito' , 'Roboto' , sans-serif ;
+    @apply text-gray-500
+}
+
+form {
+    @apply p-6 shadow-md rounded-lg mx-auto;
+}
+
+.form-group {
+    @apply my-2;
+}
+
+label {
+    @apply block mb-1;
+}
+
+.invalid label {
+    @apply text-red-500;
+}
+
+input {
+    @apply block w-full transition duration-200 border-2 border-gray-300 bg-gray-50 rounded-md py-2 px-6;
+}
+
+.invalid input {
+    @apply border-red-400;
+}
+
+input:focus {
+    @apply ring-2 ring-green-300 border-green-300 bg-green-50 outline-none;
+}
+
+.invalid input:focus {
+    @apply ring-red-300 border-red-400 bg-red-50;
+}
+
+.error {
+    @apply text-sm font-bold text-red-400;
+}
+
+button {
+    @apply py-2 px-6 rounded my-2 font-bold uppercase transition duration-200;
+}
+
+button:focus {
+    @apply outline-none;
+}
+
+button.submit {
+    @apply text-white bg-green-400 ;
+}
+
+button.submit:hover , button.submit:focus {
+    @apply bg-green-500 ring-4 ring-green-400;
+}
+
+
+button.donate {
+    @apply bg-gray-400 text-white my-6;
+}
+
+button.donate:hover , button.donate:focus {
+    @apply bg-gray-500 ring-4 ring-gray-400;
+}
+
+@media (min-width: 600px) {
+    label{
+        @apply mb-2;
+    }
+
+    form {
+        @apply p-10;
+    }
+
+    .form-group {
+        @apply my-5;
+    }
+}
