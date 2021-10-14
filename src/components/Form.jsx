@@ -26,7 +26,7 @@ const Form = ({setDataDonate}) => {
     
     return (
         <div className=" md:w-2/3 mx-auto">
-            <div className="md:w-1/2 mx-auto">
+            <div className="md:w-2/3 mx-auto">
                 <img className="w-full" src={illustration} alt="box illustration" />
             </div>
             <form className="bg-white" onSubmit={handleSubmit(onSubmit)}>

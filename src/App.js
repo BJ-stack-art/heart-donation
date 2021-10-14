@@ -6,7 +6,7 @@ function App() {
   const [dataDonate, setDataDonate] = useState(null)
   
   return (
-    <div className="min-h-screen py-4 px-6 box-border md:py-16 bg-gray-100">
+    <div className="min-h-screen py-4 px-6 box-border bg-gray-100">
         {
           dataDonate ?
             <Success setDataDonate={setDataDonate} dataDonate={dataDonate} />
