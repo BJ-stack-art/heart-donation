@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -40,19 +40,19 @@ const Form = () => {
                 </div>
                 <div className="flex flex-col md:flex-row gap-0 md:gap-8 mt-8">
                     <div className={"form-group md:w-1/2 w-full " + (errors.email ? "invalid" : "")}>
-                        <label>Email</label>
+                        <label>Email <span className="text-red-400">*</span></label>
                         <input type="email" {...register('email')} />
                         <p className="error">{errors.email?.message}</p>
                     </div>
                     <div className={"form-group md:w-1/2 w-full " + (errors.fullName ? "invalid" : "")}>
-                        <label>Full Name</label>
+                        <label>Full Name <span className="text-red-400">*</span></label>
                         <input type="text" {...register('fullName')} />
                         <p className="error">{errors.fullName?.message}</p>
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-0 md:gap-8">
                     <div className={"form-group md:w-1/2 w-full " + (errors.nric ? "invalid" : "")}>
-                        <label>NRIC</label>
+                        <label>NRIC <span className="text-red-400">*</span></label>
                         <input  type="text" {...register('nric')} />
                         <p className="error">{errors.nric?.message}</p>
                     </div>

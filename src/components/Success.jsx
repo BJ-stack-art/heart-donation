@@ -9,7 +9,7 @@ const Success = () => {
     useEffect(() => {
         if(history.location.state)
                 setName(history.location.state.data.fullName)
-    }, [])
+    }, [history])
     
     if(history.location.state) {
         return (

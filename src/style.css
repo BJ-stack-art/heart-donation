@@ -643,10 +643,6 @@ video {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -657,6 +653,11 @@ video {
 
 .translate-x-8 {
   --tw-translate-x: 2rem;
+  -webkit-transform: var(--tw-transform);
+          transform: var(--tw-transform);
+}
+
+.transform {
   -webkit-transform: var(--tw-transform);
           transform: var(--tw-transform);
 }
@@ -675,11 +676,6 @@ video {
 
 .gap-0 {
   gap: 0px;
-}
-
-.border-red-400 {
-  --tw-border-opacity: 1;
-  border-color: rgba(248, 113, 113, var(--tw-border-opacity));
 }
 
 .bg-gray-100 {
@@ -705,6 +701,11 @@ video {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .pl-20 {
@@ -735,6 +736,11 @@ video {
 
 .font-bold {
   font-weight: 700;
+}
+
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgba(248, 113, 113, var(--tw-text-opacity));
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
@@ -930,11 +936,6 @@ button.donate:hover, button.donate:focus {
 
   .md\:gap-8 {
     gap: 2rem;
-  }
-
-  .md\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   .md\:text-4xl {
