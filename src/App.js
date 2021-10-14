@@ -1,17 +1,16 @@
 import Form from "./components/Form";
-import React , {useState} from 'react'
+import React from 'react'
 import Success from "./components/Success";
+import {Switch , Route} from 'react-router-dom'
 
 function App() {
-  const [dataDonate, setDataDonate] = useState(null)
   
   return (
     <div className="min-h-screen py-4 px-6 box-border bg-gray-100">
-        {
-          dataDonate ?
-            <Success setDataDonate={setDataDonate} dataDonate={dataDonate} />
-          : <Form setDataDonate={setDataDonate} />
-        }
+      <Switch>
+        <Route exact path="/" component={Form} />
+        <Route exact path="/success" component={Success} />
+      </Switch>
     </div>
   );
 }

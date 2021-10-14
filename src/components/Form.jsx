@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import illustration from '../assets/box-illustration.svg'
+import { useHistory } from 'react-router-dom'
 
 
 const formSchema = yup.object({
@@ -10,18 +11,18 @@ const formSchema = yup.object({
     email      : yup.string().email().required(),
     fullName   : yup.string().matches(/^[a-zA-Z\s]+$/ , 'Full name can only contain letters').required(),
     nric       : yup.string().matches(/^[TFSG]\d{7}[A-Z]$/ , 'Invalid NRIC format').required(),
-    address    : yup.string().min(5).max(60),
-    phoneNumber: yup.string().min(8).max(15).matches(/^[+]?[(]?\d{1,4}[)]?[-\s\./0-9]+$/ , 'Invalid phone number format'),
+    address    : yup.string().min(5).max(60).nullable(true).transform(v => v === '' ? null : v),
+    phoneNumber: yup.string().min(8).max(15).matches(/^[+]?[(]?\d{1,4}[)]?[-\s\./0-9]+$/ , 'Invalid phone number format').nullable(true).transform(v => v === '' ? null : v), // eslint-disable-line
 })
 
-const Form = ({setDataDonate}) => {
+const Form = () => {
+    const history = useHistory()
     const {register, handleSubmit , formState: {errors}} = useForm({
         resolver: yupResolver(formSchema)
     })
     
     const onSubmit = (data) => {
-        console.table(data)
-        setDataDonate(data)
+        history.push('/success' , {data})
     }
     
     return (
@@ -33,7 +34,7 @@ const Form = ({setDataDonate}) => {
                 <div className="form-group">
                     <div className={"flex items-center " + (errors.donation ? "invalid" : "")}>
                         <span className="absolute text-3xl font-light translate-x-8">S$</span>
-                        <input autoFocus="true" className={" py-4 px-8 pl-20 text-2xl font-semibold"} placeholder="Donation amount" type="number" {...register('donation')} />
+                        <input autoFocus={true} min="10" className={" py-4 px-8 pl-20 text-2xl font-semibold"} placeholder="Donation amount" type="number" {...register('donation')} />
                     </div>
                     <p className="error">{errors.donation?.message}</p>
                 </div>
