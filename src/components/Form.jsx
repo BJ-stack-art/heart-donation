@@ -1,36 +1,33 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import illustration from '../assets/box-illustration.svg'
 
-
- /* donation : yup.number().required().min(10),
-        email : yup.string().email().required(),
-        fullname : yup.string().matches(/^[a-zA-Z\s]+$/,"Harus Alphabet").required(),
-        nric : yup.string().required().matches(/^[TFSG]\d{7}[A-Z]$/,"Format NRIC tidak valid"),
-        address : yup.string().min(10).max(60),
-        phone_number : yup.string().min(10).matches(/^[+][(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]$/,"Nomer Telepon Tidak Valid") */
 
 const formSchema = yup.object({
-    donation   : yup.number().min(10).required(),
+    donation   : yup.number('Donation must be a number').min(10).required(),
     email      : yup.string().email().required(),
-    fullName   : yup.string().required(),
-    nric       : yup.string().required(),
-    address    : yup.string(),
-    phoneNumber: yup.string(),
+    fullName   : yup.string().matches(/^[a-zA-Z\s]+$/ , 'Full name can only contain letters').required(),
+    nric       : yup.string().matches(/^[TFSG]\d{7}[A-Z]$/ , 'Invalid NRIC format').required(),
+    address    : yup.string().min(5).max(60),
+    phoneNumber: yup.string().min(8).max(15).matches(/^[+]?[(]?\d{1,4}[)]?[-\s\./0-9]+$/ , 'Invalid phone number format'),
 })
 
-const Form = () => {
-    const {register, handleSubmit , watch , formState: {errors}} = useForm({
+const Form = ({setDataDonate}) => {
+    const {register, handleSubmit , formState: {errors}} = useForm({
         resolver: yupResolver(formSchema)
     })
     
-    
-    console.log(watch("email"))
+    const onSubmit = (data) => {
+        console.table(data)
+        setDataDonate(data)
+    }
     
     return (
         <div>
-            <form onSubmit={handleSubmit((data) => console.log(data))}>
+            <img src={illustration} alt="box illustration" />
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <label>Donation Amount</label>
                     <input type="number" {...register('donation')} />
@@ -44,7 +41,7 @@ const Form = () => {
                 <div>
                     <label>Full Name</label>
                     <input type="text" {...register('fullName')} />
-                    <p>{errors.fullName?.message}</p>k
+                    <p>{errors.fullName?.message}</p>
                 </div>
                 <div>
                     <label>NRIC</label>
