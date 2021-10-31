@@ -643,12 +643,20 @@ video {
   display: flex;
 }
 
+.h-6 {
+  height: 1.5rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .translate-x-8 {
@@ -660,6 +668,25 @@ video {
 .transform {
   -webkit-transform: var(--tw-transform);
           transform: var(--tw-transform);
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
 }
 
 .flex-col {
@@ -741,6 +768,10 @@ video {
 .text-red-400 {
   --tw-text-opacity: 1;
   color: rgba(248, 113, 113, var(--tw-text-opacity));
+}
+
+.opacity-75 {
+  opacity: 0.75;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
@@ -871,6 +902,9 @@ button:focus {
 }
 
 button.submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   --tw-bg-opacity: 1;
   background-color: rgba(45, 212, 191, var(--tw-bg-opacity));
   --tw-text-opacity: 1;

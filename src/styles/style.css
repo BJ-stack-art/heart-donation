@@ -71,7 +71,7 @@ button:focus {
 }
 
 button.submit {
-    @apply text-white bg-green-400 ;
+    @apply text-white bg-green-400 flex items-center justify-center;
 }
 
 button.submit:hover , button.submit:focus {

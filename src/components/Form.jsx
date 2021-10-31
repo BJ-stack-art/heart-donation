@@ -1,14 +1,14 @@
-import React from 'react'
+import React , {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import {yupResolver} from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import illustration from '../assets/box-illustration.svg'
 import { useHistory } from 'react-router-dom'
-
+import axios from '../axios'
 
 yup.addMethod(yup.string , "NRIC" ,function(error) {
     return this.test("test-nric", error, function(str) {
-        if (str.length != 9)
+        if (str.length !== 9)
             return false;
 
         str = str.toUpperCase();
@@ -32,15 +32,15 @@ yup.addMethod(yup.string , "NRIC" ,function(error) {
             weight += icArray[i];
         }
 
-        var offset = (icArray[0] == "T" || icArray[0] == "G") ? 4 : 0;
+        var offset = (icArray[0] === "T" || icArray[0] === "G") ? 4 : 0;
         var temp = (offset + weight) % 11;
 
         var st = ["J", "Z", "I", "H", "G", "F", "E", "D", "C", "B", "A"];
         var fg = ["X", "W", "U", "T", "R", "Q", "P", "N", "M", "L", "K"];
 
         var theAlpha;
-        if (icArray[0] == "S" || icArray[0] == "T") { theAlpha = st[temp]; }
-        else if (icArray[0] == "F" || icArray[0] == "G") { theAlpha = fg[temp]; }
+        if (icArray[0] === "S" || icArray[0] === "T") { theAlpha = st[temp]; }
+        else if (icArray[0] === "F" || icArray[0] === "G") { theAlpha = fg[temp]; }
 
         return (icArray[8] === theAlpha);
     })
@@ -56,13 +56,25 @@ const formSchema = yup.object({
 })
 
 const Form = () => {
+    const [loading, setLoading] = useState(false)
+    
     const history = useHistory()
     const {register, handleSubmit , formState: {errors}} = useForm({
         resolver: yupResolver(formSchema)
     })
     
-    const onSubmit = (data) => {
-        history.push('/success' , {data})
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            let result = await axios.post('/donate' , data)
+            
+            if(result.status === 201) {
+                setLoading(false)
+                history.push('/success' , {data})
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const handleAmount = (e) => {
@@ -119,7 +131,18 @@ const Form = () => {
                     <p className="error">{errors.address?.message}</p>
                 </div>
                 <div className="flex justify-end">
-                <button className="submit" type="submit">Submit</button>
+                    <button disabled={loading ? true : false} className={(loading ? "opacity-75 " : "") + " submit"} type="submit">
+                        {
+                            loading ?
+                                <svg version="1.1" className="h-6 w-6 animate-spin" strokeWidth="4px" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                    viewBox="0 0 100 100" enableBackground="new 0 0 0 0" >
+                                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    </path>
+                                </svg>
+                                : ""
+                        }
+                    Kirim
+                </button>
                 </div>
             </form>
         </div>
